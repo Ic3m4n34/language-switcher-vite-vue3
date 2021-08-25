@@ -1,15 +1,33 @@
 <template>
   <div>
-    Hello
+    <h1> Hello Medium 👋</h1>
+    <br />
+    <h2>
+      {{ translateString('greeting') }}
+    </h2>
+    <LanguageSwitcher />
   </div>
 </template>
 
 <script setup>
-const activeLocale = window.location.pathname.split('/')[1];
-console.log('hello', activeLocale)
+import { useStore } from 'vuex';
+import { computed } from 'vue';
+import LanguageSwitcher from './components/LanguageSwitcher.vue';
+import TRANSLATIONS from './translations.json';
+const store = useStore();
 
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md
+
+const activeLanguage = computed(() => store.getters.activeLanguage);
+// get the current language from location
+const activeLanguageFromBrowser = window.location.pathname.split('/')[1];
+
+if (activeLanguageFromBrowser) {
+  store.dispatch('setLanguage', activeLanguageFromBrowser);
+}
+
+const translateString = (string) => {
+  return TRANSLATIONS[activeLanguage.value][string];
+}
 </script>
 
 <style>

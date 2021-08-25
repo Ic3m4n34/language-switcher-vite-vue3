@@ -1,0 +1,11 @@
+{
+  "de": {
+    "greeting": "Hallo! Wie geht es dir?"
+  },
+  "en": {
+    "greeting": "Hello! How are you?"
+  },
+  "es": {
+    "greeting": "¡Hola! ¿Cómo estás?"
+  }
+}
